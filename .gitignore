@@ -1,0 +1,10 @@
+.venv
+venv
+hytale_src
+__pycache__
+hytale_db
+chunks.txt
+*/HytaleServer.jar
+HytaleServer.jar
+*/cfr.jar
+cfr.jar
