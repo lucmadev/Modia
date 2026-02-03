@@ -1,0 +1,7 @@
+https://github.com/FancyInnovations/HytalePlugins.git
+https://github.com/AzureDoom/LevelingCore.git
+https://github.com/cerus/ExplorersMap.git
+https://github.com/Ryukazan/Economy.git
+https://github.com/cryptobench/EasyTPA.git
+https://github.com/rmaafs/WelcomeTale.git
+https://github.com/jacksonhardaway/wardrobe.git

@@ -90,11 +90,16 @@ if (-Not $VenvOk) {
     Write-Host "Entorno virtual OK. Se reutiliza." -ForegroundColor Green
 }
 
-# 3. Ejecutar scripts
-Write-Host "`n[3/4] Ejecutando extractChunks.py..." -ForegroundColor Yellow
+# 3. Clonar repositorios
+Write-Host "`n[3/5] Clonando repositorios de repository/repos.txt..." -ForegroundColor Yellow
+& $PythonExe utils\cloneRepos.py
+
+# 4. Ejecutar extractChunks
+Write-Host "`n[4/5] Ejecutando extractChunks.py..." -ForegroundColor Yellow
 & $PythonExe utils\extractChunks.py
 
-Write-Host "`n[4/4] Ejecutando buildDB.py..." -ForegroundColor Yellow
+# 5. Ejecutar buildDB
+Write-Host "`n[5/5] Ejecutando buildDB.py..." -ForegroundColor Yellow
 & $PythonExe utils\buildDB.py
 
 Write-Host "`n== Build completado con exito ==" -ForegroundColor Green

@@ -1,4 +1,4 @@
-.PHONY: all decompile venv check-venv install chunks db run clean cfr
+.PHONY: all decompile venv check-venv install repos chunks db run clean cfr
 
 PYTHON = python3
 VENV_DIR = venv
@@ -15,7 +15,7 @@ SERVER_JAR = server/HytaleServer.jar
 OUTPUT_DIR = hytale_src
 REQ = requirements.txt
 
-all: decompile venv install run
+all: decompile venv install repos run
 
 # -------------------------
 # Decompile
@@ -55,11 +55,18 @@ install: venv check-venv
 	$(VENV_PIP) install -r $(REQ)
 
 # -------------------------
+# Repos
+# -------------------------
+repos:
+	@echo "== Clonando repositorios de repository/repos.txt =="
+	$(VENV_PY) utils/cloneRepos.py
+
+# -------------------------
 # Run
 # -------------------------
 run: chunks db
 
-chunks:
+chunks: repos
 	@echo "== Ejecutando extractChunks.py =="
 	$(VENV_PY) utils/extractChunks.py
 
