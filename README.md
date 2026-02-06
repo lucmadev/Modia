@@ -11,11 +11,11 @@ Está pensado para responder **rápido, directo y con criterio técnico**, sin t
 
 ---
 
-## Características
-
-*  **RAG sobre el código de HytaleServer** (indexado desde `.jar`)
+## Características (Consola mode)
+ 
+*  **RAG sobre el código de HytaleServer** (indexado desde `.jar`) y **Repositorios añadibles**
 *  **Memoria conversacional ligera** (contexto entre preguntas)
-*  **Modo explicación natural** (sin comandos especiales)
+*  **Modo explicación natural** 
 *  **100% controlable y local**
 
 ---
@@ -26,6 +26,9 @@ Está pensado para responder **rápido, directo y con criterio técnico**, sin t
 * **Ollama** (LLM + embeddings)
 * **LangChain**
 * **ChromaDB**
+* **FastAPI**
+* **TailwindCSS**
+* ****
 
 Modelos recomendados:
 
@@ -34,7 +37,15 @@ Modelos recomendados:
 
 ---
 
-## Instalación
+## **PROXIMAMENTE**
+
+Instalacion (App mode) 
+
+Descargar la ultima version de Release y instalar!
+
+---
+
+## Instalación (Consola Mode)
 
 ```bash
 make install
@@ -127,11 +138,11 @@ Modia entra automáticamente en **modo explicación**, sin mostrar contexto ni r
 ## Roadmap
 
 
-* [ ] Convertir el chat en CLI
-* [ ] Agregar comandos utiles como /explain o /raw 
+* [ ] Convertir el chat en Web App
+* [ ] Agregar modos utiles como **Explain** y **Raw**
 * [ ] Persistencia de memoria en disco
-* [ ] Autocompletado de comandos
-* [ ] Flags `--no-rag` / `--rag-only`
+* [ ] Permitir usar API externas como ChatGPT, Claude, DeepSeek, etc
+* [ ] Agregar tools y CRUD a la IA
 * [ ] Perfiles por proyecto
 * [ ] Empaquetado como binario
 
