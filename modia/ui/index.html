@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Modia - Copiloto local para modding de Hytale" />
+  <title>Modia</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="bg-zinc-900 text-zinc-100 h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 py-3 border-b border-zinc-700">
+    <div class="flex flex-col">
+      <h1 class="text-xl font-bold">Modia <span class="text-zinc-400">– Hytale Mods</span></h1>
+      <div class="text-sm text-zinc-400">Preguntá, iterá y copiá el resultado para tu plugin.</div>
+    </div>
+
+    <div class="flex gap-2">
+      <button id="explainBtn" class="toggle" title="Respuesta más detallada">Explain</button>
+      <button hidden id="rawBtn" class="toggle" title="Muestra fuentes del buscador">Raw</button>
+      <button id="clearBtn" class="toggle" title="Limpiar chat">Limpiar</button>
+      <button id="menuBtn" class="toggle" title="Configuración">
+        <img src="svg/settings_fill.svg" alt="Configuración" width="25" height="25">
+      </button>
+      <span id="statusText" class="text-green-400 text-sm ml-4">● Conectando…</span>
+    </div>
+  </header>
+
+  <!-- Menú / Configuración (se despliega debajo del header para evitar clases tailwind no compiladas) -->
+  <section id="menuPanel" class="hidden px-6 py-4 border-b border-zinc-700 bg-zinc-900">
+    <div class="flex flex-col gap-2">
+      <div class="text-xl font-semibold">Configuración</div>
+      <div class="text-sm text-zinc-400">Elegí provider/modelo, configurá API keys y actualizá la base.</div>
+
+      <!-- Progreso -->
+      <div class="flex flex-col gap-2">
+        <div class="text-sm text-zinc-400">Progreso</div>
+        <div id="opsProgress" class="text-sm text-zinc-400">Sin operaciones en curso.</div>
+      </div>
+
+      <!-- Provider / Modelo -->
+      <div class="flex flex-col gap-2">
+        <div class="text-sm text-zinc-400">Provider y modelo (se aplican al chat)</div>
+        <div class="flex gap-2">
+          <select id="providerSelect" class="bg-zinc-800 rounded px-4 py-2 outline-none text-sm"></select>
+          <select id="modelSelect" class="bg-zinc-800 rounded px-4 py-2 outline-none text-sm"></select>
+          <button id="applyModelBtn" class="bg-indigo-600 px-4 py-2 rounded font-semibold">Aplicar</button>
+        </div>
+        <div id="currentModelText" class="text-sm text-zinc-400"></div>
+      </div>
+
+      <!-- API keys -->
+      <div class="flex flex-col gap-2">
+        <div class="text-sm text-zinc-400">API key (para providers externos)</div>
+        <div class="flex gap-2">
+          <input id="apiKeyInput" type="password" class="flex-1 bg-zinc-800 rounded px-4 py-2 outline-none" placeholder="API key (se guarda en ~/.modia/config.json)" />
+          <input id="baseUrlInput" class="flex-1 bg-zinc-800 rounded px-4 py-2 outline-none" placeholder="Base URL (opcional, solo OpenAI/proxy)" />
+          <button id="saveApiBtn" class="bg-indigo-600 px-4 py-2 rounded font-semibold">Guardar</button>
+        </div>
+      </div>
+
+      <!-- Repos -->
+      <div class="flex flex-col gap-2">
+        <div class="text-sm text-zinc-400">Repositorios (se usan para enriquecer el RAG)</div>
+        <div class="flex gap-2">
+          <input id="repoUrlInput" class="flex-1 bg-zinc-800 rounded px-4 py-2 outline-none" placeholder="URL git (ej: https://github.com/user/repo.git)" />
+          <button id="addRepoBtn" class="bg-indigo-600 px-4 py-2 rounded font-semibold">Añadir</button>
+          <button id="syncReposBtn" class="toggle">Sync</button>
+        </div>
+        <div id="repoList" class="text-sm text-zinc-400"></div>
+      </div>
+
+      <!-- DB -->
+      <div class="flex flex-col gap-2">
+        <div class="text-sm text-zinc-400">Base de datos (chunks → Chroma)</div>
+        <div class="flex gap-2">
+          <button id="refreshStatsBtn" class="toggle">Ver estado</button>
+          <button id="rebuildDbBtn" class="bg-indigo-600 px-4 py-2 rounded font-semibold">Actualizar base</button>
+          <div id="dbStatsText" class="text-sm text-zinc-400 ml-4"></div>
+        </div>
+      </div>
+
+      <!-- Log -->
+      <div class="text-sm text-zinc-400">Historial</div>
+      <pre id="opsLog" class="code-block">Listo.</pre>
+    </div>
+  </section>
+
+  <!-- Chat -->
+  <main id="chat" class="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+    <div class="message-ai">
+      Hola. Soy Modia.
+
+      Escribí lo que querés construir y te propongo el enfoque, APIs, hooks y pasos.
+      Podes configurar el proveedor (OpenAI, Claude, etc.) y el modelo en la configuración arriba a la derecha.
+      También podes añadir repositorios para enriquecer la información de la IA.
+
+      Tip: Activá <b>Explain</b> si querés más detalles.
+    </div>
+  </main>
+
+  <!-- Input -->
+  <footer id="chatFooter" class="p-4 border-t border-zinc-700 flex gap-2">
+    <input
+      id="input"
+      class="flex-1 bg-zinc-800 rounded px-4 py-2 outline-none"
+      placeholder="Ej: “Quiero un comando /home con cooldown por jugador”"
+      autocomplete="off"
+    />
+    <button id="sendBtn" class="bg-indigo-600 px-4 py-2 rounded font-semibold">
+      Enviar
+    </button>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
