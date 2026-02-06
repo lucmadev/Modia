@@ -28,13 +28,13 @@ def clone_repository(url, target_dir):
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL
             )
-            print(f"  ✓ '{repo_name}' actualizado")
+            print(f"'{repo_name}' actualizado")
             return True
         except subprocess.CalledProcessError:
-            print(f"  ⚠ Error actualizando '{repo_name}'. Continuando...")
+            print(f"Error actualizando '{repo_name}'. Continuando...")
             return False
         except FileNotFoundError:
-            print(f"  ⚠ Git no encontrado. Saltando '{repo_name}'...")
+            print(f"Git no encontrado. Saltando '{repo_name}'...")
             return False
     else:
         # Clonar nuevo repositorio
@@ -46,13 +46,13 @@ def clone_repository(url, target_dir):
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL
             )
-            print(f"  ✓ '{repo_name}' clonado")
+            print(f"'{repo_name}' clonado")
             return True
         except subprocess.CalledProcessError:
-            print(f"  ✗ Error clonando '{repo_name}'")
+            print(f"Error clonando '{repo_name}'")
             return False
         except FileNotFoundError:
-            print(f"  ✗ Git no encontrado. Instala Git para clonar repositorios.")
+            print(f"Git no encontrado. Instala Git para clonar repositorios.")
             return False
 
 def main():
