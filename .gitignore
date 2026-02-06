@@ -8,3 +8,9 @@ chunks.txt
 HytaleServer.jar
 */cfr.jar
 cfr.jar
+**/node_modules
+**/build
+**/dist
+**/package-lock.json
+**/package.json
+**/package-lock.json

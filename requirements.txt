@@ -4,4 +4,15 @@ langchain-chroma
 langchain-ollama
 langchain-community 
 langchain-text-splitters
+langchain-core
+langchain-openai
+langchain-google-genai
+langchain-anthropic
 ollama
+fastapi
+uvicorn[standard]
+pydantic
+requests
+typer
+rich
+pywebview
